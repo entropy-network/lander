@@ -1,0 +1,24 @@
+@keyframes stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+.bg-stripes {
+  background-image: linear-gradient(
+    135deg,
+    #fff 0%,
+    #fff 5%,
+    transparent 5%,
+    transparent 50%,
+    #fff 50%,
+    #fff 55%,
+    transparent 55%,
+    transparent 100%
+  );
+  background-size: 20px 20px;
+  animation: stripes 10s linear infinite;
+}
