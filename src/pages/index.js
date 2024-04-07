@@ -4,12 +4,10 @@ import '../styles/stripes.css'; // Ensure your CSS is properly imported
 
 const IndexPage = () => {
   useEffect(() => {
-    // Three.js setup
-    let scene, camera, renderer, lines;
-    init();
-    animate();
+    let scene, camera, renderer;
+    let lineGroup = new THREE.Group(); // Use a Group to hold lines
 
-    function init() {
+    function initThree() {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(
         75,
@@ -17,33 +15,47 @@ const IndexPage = () => {
         0.1,
         1000
       );
-      camera.position.z = 5;
+      camera.position.z = 100;
 
-      renderer = new THREE.WebGLRenderer({ alpha: true }); // Make background transparent
+      renderer = new THREE.WebGLRenderer({ alpha: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      document.getElementById('three-canvas').appendChild(renderer.domElement); // Attach to a div element
+      document.getElementById('three-canvas').appendChild(renderer.domElement);
 
-      lines = new Array(50).fill().map(() => createLine());
-      lines.forEach(line => scene.add(line));
+      // Create lines
+      for (let i = 0; i < 50; i++) {
+        let material = new THREE.LineBasicMaterial({ color: 0xffffff });
+        let geometry = new THREE.BufferGeometry();
+
+        // Create a line with random start and end points
+        const vertices = new Float32Array([
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200, // Vertex 1 (x, y, z)
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200,
+          (Math.random() - 0.5) * 200, // Vertex 2 (x, y, z)
+        ]);
+        geometry.setAttribute(
+          'position',
+          new THREE.BufferAttribute(vertices, 3)
+        );
+
+        let line = new THREE.Line(geometry, material);
+        lineGroup.add(line); // Add each line to the group
+      }
+
+      scene.add(lineGroup); // Add the group to the scene
 
       window.addEventListener('resize', onWindowResize, false);
     }
 
-    function createLine() {
-      const material = new THREE.LineBasicMaterial({ color: 0xffffff });
-      const points = [];
-      points.push(new THREE.Vector3(-1, 0, 0));
-      points.push(new THREE.Vector3(0, 1, 0));
-      const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      return new THREE.Line(geometry, material);
-    }
-
     function animate() {
       requestAnimationFrame(animate);
-      lines.forEach(line => {
-        line.rotation.x += 0.01;
-        line.rotation.y += 0.01;
-      });
+
+      // Simple animation: rotate the group of lines
+      lineGroup.rotation.x += 0.005;
+      lineGroup.rotation.y += 0.005;
+
       renderer.render(scene, camera);
     }
 
@@ -53,21 +65,34 @@ const IndexPage = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
+    initThree();
+    animate();
+
     return () => {
       window.removeEventListener('resize', onWindowResize);
-      renderer.domElement.remove();
+      renderer.domElement.remove(); // Cleanup
     };
   }, []);
 
   return (
     <main className="bg-black text-white min-h-screen flex flex-col justify-center items-center font-sans relative overflow-hidden">
-      <div id="three-canvas" className="absolute inset-0"></div>{' '}
-      {/* Three.js canvas container */}
-      <div className="absolute inset-0 bg-stripes opacity-60"></div>{' '}
-      {/* Stripes background */}
-      <div className="text-center z-10 relative">
-        {' '}
-        {/* Ensure content is positioned above both backgrounds */}
+      <div
+        id="three-canvas"
+        style={{
+          width: '100vw',
+          height: '100vh',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          opacity: 0.62,
+          zIndex: 1,
+        }}
+      ></div>
+      <div
+        className="absolute inset-0 bg-stripes opacity-60"
+        style={{ zIndex: 2 }}
+      ></div>
+      <div className="text-center z-10 relative" style={{ zIndex: 3 }}>
         <h1 className="text-4xl font-light mb-0">
           ENTROPY<span className="text-red-500 italic">{'{'}</span>
           <span className="text-red-500 italic">labs</span>
