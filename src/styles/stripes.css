@@ -1,24 +1,58 @@
-@keyframes stripes {
+@keyframes stripes-fast {
   0% {
-    background-position: 0 0;
+    background-position: 120vw -20vh;
   }
   100% {
-    background-position: 0 100vh;
+    background-position: -120vw 120vh;
   }
 }
 
+@keyframes stripes-medium {
+  0% {
+    background-position: 120vw -20vh;
+  }
+  100% {
+    background-position: -100vw 100vh;
+  }
+}
+
+@keyframes stripes-slow {
+  0% {
+    background-position: 120vw -20vh;
+  }
+  100% {
+    background-position: -80vw 80vh;
+  }
+}
 .bg-stripes {
   background-image: linear-gradient(
-    135deg,
-    #fff 0%,
-    #fff 5%,
-    transparent 5%,
-    transparent 50%,
-    #fff 50%,
-    #fff 55%,
-    transparent 55%,
-    transparent 100%
-  );
-  background-size: 20px 20px;
-  animation: stripes 10s linear infinite;
+      315deg,
+      transparent,
+      transparent 50%,
+      #fff 50%,
+      #fff 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      315deg,
+      transparent,
+      transparent 50%,
+      #fff 50%,
+      #fff 50.5%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      315deg,
+      transparent,
+      transparent 50%,
+      #fff 50%,
+      #fff 50.5%,
+      transparent 50.5%
+    );
+  background-size: 240vw 240vh;
+  animation:
+    stripes-fast 10s linear infinite,
+    stripes-medium 15s linear infinite,
+    stripes-slow 20s linear infinite;
+  background-repeat: no-repeat;
 }
