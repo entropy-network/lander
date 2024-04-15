@@ -104,31 +104,41 @@ const IndexPage = () => {
         <p className="text-xl font-light text-gray-400 max-w-2xl mx-auto leading-relaxed mt-4">
           Verifying AI models with our novel ZkML rollup network
         </p>
-        <div className="flex justify-center space-x-4 mt-6">
-          <a
-            href="https://github.com/entropy-network"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-gray-400 transition-colors duration-300"
-          >
-            <FontAwesomeIcon icon={faGithub} size="2x" />
-          </a>
-          <a
-            href="https://twitter.com/richardmelko"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-gray-400 transition-colors duration-300"
-          >
-            <FontAwesomeIcon icon={faTwitter} size="2x" />
-          </a>
-          <a
-            href="https://github.com/entropy-network/docs/blob/main/litepaper.md"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-gray-400 transition-colors duration-300"
-          >
-            <FontAwesomeIcon icon={faFile} size="2x" />
-          </a>
+        <div className="flex flex-col items-center mt-6">
+          <div className="flex justify-center space-x-4">
+            <a
+              href="https://github.com/entropy-network"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-gray-400 transition-colors duration-300"
+            >
+              <FontAwesomeIcon icon={faGithub} size="2x" />
+            </a>
+            <a
+              href="https://twitter.com/richardmelko"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-gray-400 transition-colors duration-300"
+            >
+              <FontAwesomeIcon icon={faTwitter} size="2x" />
+            </a>
+          </div>
+          <div className="mt-6">
+            <a
+              href="https://github.com/entropy-network/docs/blob/main/litepaper.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-white border hover:bg-gray-700 transition-colors duration-300 rounded-full px-4 py-2 inline-flex items-center space-x-2"
+              style={{
+                backgroundColor: 'transparent',
+                color: 'white',
+                borderWidth: '1px',
+              }}
+            >
+              <FontAwesomeIcon icon={faFile} size="1x" />
+              <span>Read the Whitepaper</span>
+            </a>
+          </div>
         </div>
       </div>
     </main>
