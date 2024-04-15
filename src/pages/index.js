@@ -107,7 +107,7 @@ const IndexPage = () => {
         <div className="flex flex-col items-center mt-6">
           <div className="flex justify-center space-x-4">
             <a
-              href="https://github.com/entropy-network"
+              href="https://github.com/entropy-network/paragon"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-gray-400 transition-colors duration-300"
